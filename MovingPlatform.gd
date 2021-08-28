@@ -21,23 +21,32 @@ func _ready():
 func init_timers():
 	lifetime_timer = Timer.new()
 	self.add_child(lifetime_timer)
+	lifetime_timer.set_one_shot(true)
 	lifetime_timer.connect("timeout", self, "explode")
 	lifetime_timer.set_wait_time(lifetime_duration)
 	
 	explosion_timer = Timer.new()
 	self.add_child(explosion_timer)
-	explosion_timer.connect("timeout", self, "queue_free")
+	explosion_timer.set_one_shot(true)
+	explosion_timer.connect("timeout", self, "destroy")
 	explosion_timer.set_wait_time(explosion_duration)
 
 func explode():
-	is_active = false
-	explosion_timer.start()
-	print("explode")
+	if explosion_timer.get_time_left() == 0:
+		is_active = false
+		explosion_timer.start()
+		print("explode 2")
+
+func destroy():
+	for child in get_children():
+		child.queue_free()
+	queue_free()
 
 func activate():
-	lifetime_timer.start()
-	is_active = true
-	print("Platform started movement")
+	if lifetime_timer.get_time_left() == 0:
+		lifetime_timer.start()
+		is_active = true
+		print("Platform started movement")
 	
 func move_platform(direction):
 	if not is_active:
