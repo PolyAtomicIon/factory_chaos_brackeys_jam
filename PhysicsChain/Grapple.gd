@@ -41,10 +41,6 @@ func input(event: InputEvent) -> void:
 func state_enter() -> void:
 	target_ray = host.get_node("TargetRay")
 
-	#replace by normal code
-	if( target_ray.get_collider().name == 'MovingPlatform' ):
-		target_ray.get_collider().activate()
-
 	target_position = target_ray.get_collision_point()
 	current_position = get_parent().get_parent().get_parent().position
 	distance = current_position.distance_to(target_position)
@@ -53,6 +49,9 @@ func state_enter() -> void:
 		is_valid = false
 		return
 	
+	#replace by normal code
+	if( 'MovingPlatform' in target_ray.get_collider().name ):
+		target_ray.get_collider().activate()
 	anchor = Sprite.new()
 	anchor.texture = anchor_texture
 	var anchor_host : PhysicsBody2D = target_ray.get_collider()
@@ -121,6 +120,8 @@ func wrap() -> void:
 
 func state_exit() -> void:
 	if not is_valid or not is_instance_valid(anchor):
+		host.get_node("GravityField").gravity_vec = Vector2(0, 1)
+		$Rope.visible = false
 		return
 	anchor.queue_free()
 	while anchor_stack:

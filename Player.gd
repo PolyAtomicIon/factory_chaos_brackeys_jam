@@ -39,9 +39,9 @@ func _integrate_forces(state):
 	$"../Camera2D".notify_character_position(self.global_position)
 	
 	var movement_dir = 0
+	var actions_queue = []
 	
 	if is_grounded():	
-		var actions_queue = []
 		if Input.is_action_pressed("ui_up"):
 			actions_queue.append('up')
 			

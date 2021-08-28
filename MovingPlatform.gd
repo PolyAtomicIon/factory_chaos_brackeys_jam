@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var is_active = false
-var movement_speed = 500
+var movement_speed = 400
 export var direction = Vector2(0, 0)
 
 var is_movement_started = false

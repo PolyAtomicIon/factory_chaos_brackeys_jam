@@ -4,7 +4,7 @@ extends Node2D
 signal Angle
 
 
-export (int) var pull_strength = 1500
+export (int) var pull_strength = 750
 
 
 var parent : RigidBody2D
