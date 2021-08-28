@@ -32,11 +32,12 @@ func orbit(center : Vector2) -> void:
 			parent.apply_central_impulse(radius.normalized() * -rad_vel * parent.mass)
 	
 	# Restrict radial gravity
-	angle = acos(radius.dot(Vector2(0, 1)) / radius.length())
-	var grav_vec = Vector2(0, 1) - cos(angle) * radius.normalized()
-	if angle > PI/2:
-		grav_vec = Vector2(0, 1)
-	$GravityField.gravity_vec = grav_vec
+	if radius.length() > 0:
+		angle = acos(radius.dot(Vector2(0, 1)) / radius.length())
+		var grav_vec = Vector2(0, 1) - cos(angle) * radius.normalized()
+		if angle > PI/2:
+			grav_vec = Vector2(0, 1)
+		$GravityField.gravity_vec = grav_vec
 
 
 func reel_in(center : Vector2, delta : float) -> void:
