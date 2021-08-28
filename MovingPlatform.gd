@@ -13,6 +13,9 @@ var lifetime_duration = 3.5
 
 var explosion_timer
 var explosion_duration = 1
+var explosion_damage = 35
+
+onready var player = get_node("/root/Main/Player")
 
 func _ready():
 	initial_position = position
@@ -31,10 +34,16 @@ func init_timers():
 	explosion_timer.connect("timeout", self, "destroy")
 	explosion_timer.set_wait_time(explosion_duration)
 
+
+func is_player_in_radius():
+	return position.distance_to(player.position) <= 300
+	
 func explode():
 	if explosion_timer.get_time_left() == 0:
 		is_active = false
 		explosion_timer.start()
+		if is_player_in_radius():
+			player.take_damage(explosion_damage)
 		print("explode 2")
 
 func destroy():

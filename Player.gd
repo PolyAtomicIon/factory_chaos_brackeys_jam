@@ -7,6 +7,12 @@ var delta_move_speed = 10
 var move_speed = 0
 var multiplier = -1.05
 
+var health = 100
+
+func take_damage(damage = 5):
+	health -= damage
+	print("Health ", health)
+
 func is_grounded():
 	return linear_velocity.y > -0.05 and linear_velocity.y < 0.05
 
