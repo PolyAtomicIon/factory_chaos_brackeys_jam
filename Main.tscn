@@ -52,6 +52,7 @@ position = Vector2( -384.517, 342.736 )
 position = Vector2( 105.833, 415.774 )
 collision_layer = 3
 script = ExtResource( 8 )
+direction = Vector2( 1, 0 )
 
 [node name="Sprite" type="Sprite" parent="MovingPlatform"]
 modulate = Color( 0.352941, 0.772549, 0.180392, 1 )

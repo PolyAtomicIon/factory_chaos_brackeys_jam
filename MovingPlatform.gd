@@ -1,28 +1,42 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var is_active = false
+var movement_speed = 500
+export var direction = Vector2(0, 0)
 
-# Called when the node enters the scene tree for the first time.
+var is_movement_started = false
+var initial_position
+export var distance = 1500
+
+var timer
+
 func _ready():
-	pass # Replace with function body.
+	initial_position = position
+	init_timer()
+	
+func init_timer():
+	timer = Timer.new()
+	self.add_child(timer)
+	# Connect the timer to make it call "queue_free" after two seconds
+	timer.connect("timeout", self, "queue_free")
+	timer.set_wait_time(2)
+
+func explode():
+	is_active = false
+	print("explode")
 
 func activate():
+	timer.start()
 	is_active = true
 	print("Platform started movement")
 	
-func move_platform():
+func move_platform(direction):
 	if not is_active:
 		return
-	var velocity = move_and_slide(Vector2(0, -100))
+	is_movement_started = true
+	var velocity = move_and_slide(direction * movement_speed)
 
 func _physics_process(delta):
-	move_platform()
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if position.distance_to(initial_position) > distance:
+		explode()
+	move_platform(direction)
