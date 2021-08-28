@@ -27,7 +27,6 @@ func init_timers():
 	explosion_timer.set_wait_time(explosion_duration)
 
 func is_player_in_radius():
-	print(player)
 	return position.distance_to(player.position) <= 50
 
 func explode():

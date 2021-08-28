@@ -10,7 +10,7 @@ var multiplier = -1.05
 var health = 100
 
 var is_external_force = false
-var external_force = 500
+var external_force = 400
 
 func take_damage(damage = 5):
 	health -= damage
@@ -48,7 +48,7 @@ func _integrate_forces(state):
 	var actions_queue = []
 	
 	if is_external_force:
-		apply_impulse(Vector2(0, 0), Vector2(1, -1) * external_force)
+		apply_impulse(Vector2(0, 0), Vector2(0.3, -1) * external_force)
 		print("EXTERNAL FORCE")
 		is_external_force = false
 	
@@ -78,6 +78,8 @@ func _integrate_forces(state):
 			else: 
 				accelerate()
 				start_horizontal_movement(movement_dir)
+	else:
+		print("not grounded")
 				
 func enable_bounce():
 	set_bounce(1)

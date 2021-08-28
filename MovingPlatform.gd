@@ -35,8 +35,8 @@ func init_timers():
 	explosion_timer.set_wait_time(explosion_duration)
 
 
-func is_player_in_radius():
-	return position.distance_to(player.position) <= 300
+func is_player_in_radius(pos = position):
+	return pos.distance_to(player.position) <= 300
 	
 func explode():
 	if explosion_timer.get_time_left() == 0:
@@ -47,10 +47,13 @@ func explode():
 		print("explode 2")
 
 func destroy():
+	var c_pos = position
 	for child in get_children():
 		child.queue_free()
 	queue_free()
-	player.apply_external_force()
+	# check radius
+	if is_player_in_radius(c_pos):
+		player.apply_external_force()
 	
 
 func activate():
