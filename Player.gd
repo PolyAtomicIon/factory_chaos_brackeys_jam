@@ -30,6 +30,8 @@ func _ready():
 	reset_move_speed()
 	
 func _integrate_forces(state):
+	$"../Camera2D".notify_character_position(self.global_position)
+	
 	var movement_dir = 0
 	
 	if is_grounded():	
@@ -59,6 +61,6 @@ func _integrate_forces(state):
 			else: 
 				accelerate()
 				start_horizontal_movement(movement_dir)
-			
+				
 func _on_PhysicsChain_Angle(angle) -> void:
 	$Label.text = "Angle: " + String(angle)
