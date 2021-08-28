@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var jump_speed = 280
+var jump_speed = 400
 var initial_move_speed = 75
 var final_move_speed = 300
 var delta_move_speed = 10
@@ -17,7 +17,7 @@ func stop_horizontal_movement():
 	apply_impulse(Vector2(0, 0), Vector2(linear_velocity.x * multiplier, 0))
 
 func instantly_stop_horizontal_movement():
-	set_axis_velocity(Vector2(linear_velocity.x / 4, linear_velocity.y))
+	set_axis_velocity(Vector2(linear_velocity.x / 2.5, linear_velocity.y))
 
 func reset_move_speed():
 	move_speed = initial_move_speed
@@ -54,7 +54,8 @@ func _integrate_forces(state):
 		if len(actions_queue) > 0:
 			if actions_queue[0] == 'up':
 				instantly_stop_horizontal_movement()
-				apply_impulse(Vector2(0, 0), Vector2(0, -jump_speed))
+				set_axis_velocity(Vector2(linear_velocity.x, -jump_speed))
+				#apply_impulse(Vector2(0, 0), Vector2(0, -jump_speed))
 			else: 
 				accelerate()
 				start_horizontal_movement(movement_dir)
