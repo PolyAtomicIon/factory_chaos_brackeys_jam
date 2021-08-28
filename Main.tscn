@@ -45,6 +45,7 @@ gravity_scale = 9.8
 [node name="Ball" type="RigidBody2D" parent="."]
 position = Vector2( 355.924, 100.182 )
 collision_layer = 3
+mass = 0.5
 gravity_scale = 9.8
 script = ExtResource( 6 )
 
@@ -61,6 +62,7 @@ texture = ExtResource( 4 )
 [node name="Ball2" type="RigidBody2D" parent="."]
 position = Vector2( 879.175, -123.389 )
 collision_layer = 3
+mass = 0.5
 gravity_scale = 9.8
 script = ExtResource( 6 )
 
@@ -77,6 +79,7 @@ texture = ExtResource( 4 )
 [node name="Ball3" type="RigidBody2D" parent="."]
 position = Vector2( -329.059, -480.151 )
 collision_layer = 3
+mass = 0.5
 gravity_scale = 9.8
 script = ExtResource( 6 )
 
@@ -93,6 +96,7 @@ texture = ExtResource( 4 )
 [node name="Ball4" type="RigidBody2D" parent="."]
 position = Vector2( 765.011, 252.401 )
 collision_layer = 3
+mass = 0.5
 gravity_scale = 9.8
 can_sleep = false
 script = ExtResource( 6 )
