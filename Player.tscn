@@ -26,5 +26,8 @@ margin_left = 30.0
 margin_top = -41.0
 margin_right = 132.0
 margin_bottom = -27.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="Angle" from="PhysicsChain" to="." method="_on_PhysicsChain_Angle"]

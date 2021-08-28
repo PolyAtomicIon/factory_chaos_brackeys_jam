@@ -9,17 +9,23 @@ var anchor : Sprite
 var anchor_stack := []
 var target_ray : RayCast2D
 
+var target_position = Vector2()
+var current_position = Vector2()
+var distance = 0
+
+var is_valid = false
 
 func update(delta : float) -> void:
-	wrap()
-	unwind()
-	host.orbit(anchor.global_position)
-	host.reel_in(anchor.global_position, delta)
-	var points = [host.global_position, anchor.global_position]
-	if anchor_stack:
-		for a in anchor_stack:
-			points.insert(2, a.global_position)
-	$Rope.points = PoolVector2Array(points)
+	if is_valid:
+		wrap()
+		unwind()
+		host.orbit(anchor.global_position)
+		host.reel_in(anchor.global_position, delta)
+		var points = [host.global_position, anchor.global_position]
+		if anchor_stack:
+			for a in anchor_stack:
+				points.insert(2, a.global_position)
+		$Rope.points = PoolVector2Array(points)
 	
 
 
@@ -30,13 +36,25 @@ func input(event: InputEvent) -> void:
 
 func state_enter() -> void:
 	target_ray = host.get_node("TargetRay")
+	
+	target_position = target_ray.get_collision_point()
+	current_position = get_parent().get_parent().get_parent().position
+	distance = current_position.distance_to(target_position)
+	
+	print(distance)
+	if( distance > 400 ):
+		is_valid = false
+		return
+	
 	anchor = Sprite.new()
 	anchor.texture = anchor_texture
 	var anchor_host : PhysicsBody2D = target_ray.get_collider()
 	anchor_host.add_child(anchor)
 	anchor.position = anchor_host.to_local(target_ray.get_collision_point())
+	
 	$Rope.visible = true
-
+	is_valid = true
+	
 
 func create_anchor(anchor_host : PhysicsBody2D, anchor_pos : Vector2) -> Sprite:
 	var new_anchor = Sprite.new()
@@ -89,6 +107,8 @@ func wrap() -> void:
 
 
 func state_exit() -> void:
+	if not is_valid:
+		return
 	anchor.queue_free()
 	while anchor_stack:
 		anchor_stack[0].queue_free()

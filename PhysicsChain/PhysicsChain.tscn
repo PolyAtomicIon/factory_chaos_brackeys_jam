@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://PhysicsChain/PhysicsChain.gd" type="Script" id=1]
 [ext_resource path="res://assets/chain_link.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/TargetMarker.png" type="Texture" id=5]
 [ext_resource path="res://PhysicsChain/Grapple.gd" type="Script" id=6]
 [ext_resource path="res://assets/chain_anchor.png" type="Texture" id=7]
+[ext_resource path="res://assets/Player.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.70449
@@ -31,6 +32,11 @@ script = ExtResource( 4 )
 [node name="TargetMarker" type="Sprite" parent="StateMachine/Idle"]
 visible = false
 texture = ExtResource( 5 )
+
+[node name="TargetMarkerNotAllowed" type="Sprite" parent="StateMachine/Idle"]
+visible = false
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )
 
 [node name="Grapple" type="Node" parent="StateMachine"]
 script = ExtResource( 6 )
