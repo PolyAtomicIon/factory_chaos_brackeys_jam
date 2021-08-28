@@ -50,6 +50,8 @@ func destroy():
 	for child in get_children():
 		child.queue_free()
 	queue_free()
+	player.apply_external_force()
+	
 
 func activate():
 	if lifetime_timer.get_time_left() == 0:

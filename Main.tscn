@@ -45,6 +45,18 @@ gravity_scale = 9.8
 
 [node name="Ball" parent="." instance=ExtResource( 4 )]
 
+[node name="Ball2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 541.119, 46.3039 )
+
+[node name="Ball3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 630.916, 59.7734 )
+
+[node name="Ball4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 345.811, -52.4728 )
+
+[node name="Ball5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 213.36, -23.2887 )
+
 [node name="SoftBody2D3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -384.517, 342.736 )
 

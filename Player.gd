@@ -9,6 +9,9 @@ var multiplier = -1.05
 
 var health = 100
 
+var is_external_force = false
+var external_force = 500
+
 func take_damage(damage = 5):
 	health -= damage
 	print("Health ", health)
@@ -21,7 +24,10 @@ func start_horizontal_movement(direction):
 	
 func stop_horizontal_movement():
 	apply_impulse(Vector2(0, 0), Vector2(linear_velocity.x * multiplier, 0))
-
+	
+func apply_external_force():
+	is_external_force = true
+	
 func instantly_stop_horizontal_movement():
 	set_axis_velocity(Vector2(linear_velocity.x / 2.5, linear_velocity.y))
 
@@ -40,6 +46,11 @@ func _integrate_forces(state):
 	
 	var movement_dir = 0
 	var actions_queue = []
+	
+	if is_external_force:
+		apply_impulse(Vector2(0, 0), Vector2(1, -1) * external_force)
+		print("EXTERNAL FORCE")
+		is_external_force = false
 	
 	if is_grounded():	
 		if Input.is_action_pressed("ui_up"):
@@ -68,6 +79,11 @@ func _integrate_forces(state):
 				accelerate()
 				start_horizontal_movement(movement_dir)
 				
+func enable_bounce():
+	set_bounce(1)
+
+func disable_bounce():
+	set_bounce(0)
 
 func _on_PhysicsChain_Angle(angle) -> void:
 	$Label.text = "Angle: " + String(angle)

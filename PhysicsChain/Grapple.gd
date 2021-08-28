@@ -14,6 +14,7 @@ var current_position = Vector2()
 var distance = 0
 
 export var is_valid = false
+onready var player = get_node("/root/Main/Player")
 
 func update(delta : float) -> void:
 	if is_valid and is_instance_valid(anchor):
@@ -52,6 +53,9 @@ func state_enter() -> void:
 	#replace by normal code
 	if( 'MovingPlatform' in target_ray.get_collider().name ):
 		target_ray.get_collider().activate()
+		
+	player.enable_bounce()
+		
 	anchor = Sprite.new()
 	anchor.texture = anchor_texture
 	var anchor_host : PhysicsBody2D = target_ray.get_collider()
@@ -122,6 +126,7 @@ func state_exit() -> void:
 	if not is_valid or not is_instance_valid(anchor):
 		host.get_node("GravityField").gravity_vec = Vector2(0, 1)
 		$Rope.visible = false
+		player.disable_bounce()	
 		return
 	anchor.queue_free()
 	while anchor_stack:
@@ -130,3 +135,4 @@ func state_exit() -> void:
 			anchor_stack.remove(0)
 	host.get_node("GravityField").gravity_vec = Vector2(0, 1)
 	$Rope.visible = false
+	player.disable_bounce()	
