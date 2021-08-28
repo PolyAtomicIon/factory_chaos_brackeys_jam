@@ -41,7 +41,6 @@ func state_enter() -> void:
 	current_position = get_parent().get_parent().get_parent().position
 	distance = current_position.distance_to(target_position)
 	
-	print(distance)
 	if( distance > 400 ):
 		is_valid = false
 		return

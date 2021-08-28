@@ -62,5 +62,6 @@ func _integrate_forces(state):
 				accelerate()
 				start_horizontal_movement(movement_dir)
 				
+
 func _on_PhysicsChain_Angle(angle) -> void:
 	$Label.text = "Angle: " + String(angle)
