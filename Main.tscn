@@ -1,15 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://SoftBody2D/SoftBody2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Player.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/SoftBody2D/SoftBody2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/Ball.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://Ball.gd" type="Script" id=6]
+[ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
+[ext_resource path="res://MovingPlatform.gd" type="Script" id=8]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 12.491
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 29.5788, 29.0042 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 7 )
@@ -42,74 +43,20 @@ position = Vector2( 500.83, 88.6425 )
 collision_mask = 2
 gravity_scale = 9.8
 
-[node name="Ball" type="RigidBody2D" parent="."]
-position = Vector2( 355.924, 100.182 )
-collision_layer = 3
-mass = 0.5
-gravity_scale = 9.8
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-scale = Vector2( 4, 4 )
-z_as_relative = false
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Ball"]
-modulate = Color( 0.101961, 0.462745, 0.658824, 1 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 4 )
-
-[node name="Ball2" type="RigidBody2D" parent="."]
-position = Vector2( 879.175, -123.389 )
-collision_layer = 3
-mass = 0.5
-gravity_scale = 9.8
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball2"]
-scale = Vector2( 4, 4 )
-z_as_relative = false
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Ball2"]
-modulate = Color( 0.101961, 0.462745, 0.658824, 1 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 4 )
-
-[node name="Ball3" type="RigidBody2D" parent="."]
-position = Vector2( -329.059, -480.151 )
-collision_layer = 3
-mass = 0.5
-gravity_scale = 9.8
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball3"]
-scale = Vector2( 4, 4 )
-z_as_relative = false
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Ball3"]
-modulate = Color( 0.101961, 0.462745, 0.658824, 1 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 4 )
-
-[node name="Ball4" type="RigidBody2D" parent="."]
-position = Vector2( 765.011, 252.401 )
-collision_layer = 3
-mass = 0.5
-gravity_scale = 9.8
-can_sleep = false
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball4"]
-scale = Vector2( 4, 4 )
-z_as_relative = false
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Ball4"]
-modulate = Color( 0.101961, 0.462745, 0.658824, 1 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 4 )
+[node name="Ball" parent="." instance=ExtResource( 4 )]
 
 [node name="SoftBody2D3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -384.517, 342.736 )
+
+[node name="MovingPlatform" type="KinematicBody2D" parent="."]
+position = Vector2( 105.833, 415.774 )
+collision_layer = 3
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform"]
+modulate = Color( 0.352941, 0.772549, 0.180392, 1 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform"]
+position = Vector2( 1.52588e-05, -0.280579 )
+shape = SubResource( 1 )

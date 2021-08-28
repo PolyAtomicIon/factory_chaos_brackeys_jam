@@ -36,7 +36,11 @@ func input(event: InputEvent) -> void:
 
 func state_enter() -> void:
 	target_ray = host.get_node("TargetRay")
-	
+
+	#replace by normal code
+	if( target_ray.get_collider().name == 'MovingPlatform' ):
+		target_ray.get_collider().activate()
+
 	target_position = target_ray.get_collision_point()
 	current_position = get_parent().get_parent().get_parent().position
 	distance = current_position.distance_to(target_position)
