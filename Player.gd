@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+signal damaged(by)
+
 var jump_speed = 400
 var initial_move_speed = 75
 var final_move_speed = 300
@@ -14,6 +16,7 @@ var external_force = 400
 
 func take_damage(damage = 5):
 	health -= damage
+	emit_signal("damaged", damage)
 	print("Health ", health)
 
 func is_grounded():
@@ -79,7 +82,8 @@ func _integrate_forces(state):
 				accelerate()
 				start_horizontal_movement(movement_dir)
 	else:
-		print("not grounded")
+		#print("not grounded")
+		pass
 				
 func enable_bounce():
 	set_bounce(1)

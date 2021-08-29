@@ -7,6 +7,8 @@ var explosion_timer
 var explosion_duration = 1
 
 onready var player = get_node("/root/Main/Player")
+onready var particles = get_child(0)
+onready var sprite = get_child(2)
 
 func _ready():
 	set_bounce (0.75)
@@ -27,10 +29,13 @@ func init_timers():
 	explosion_timer.set_wait_time(explosion_duration)
 
 func is_player_in_radius():
-	return position.distance_to(player.position) <= 50
+	return position.distance_to(player.position) <= 250
 
 func explode():
 	explosion_timer.start()
+	particles.particles_explode = true
+	sprite.queue_free()
 	if is_player_in_radius():
 		player.take_damage()
 	print("explode")
+
