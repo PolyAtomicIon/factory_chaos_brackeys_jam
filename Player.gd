@@ -18,6 +18,8 @@ func take_damage(damage = 5):
 	health -= damage
 	emit_signal("damaged", damage)
 	print("Health ", health)
+	if( health <= 0 ):
+		get_parent().reload()
 
 func is_grounded():
 	return linear_velocity.y > -0.05 and linear_velocity.y < 0.05

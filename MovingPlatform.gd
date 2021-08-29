@@ -12,7 +12,7 @@ var lifetime_timer
 var lifetime_duration = 3.5
 
 var explosion_timer
-var explosion_duration = 1
+var explosion_duration = 0.35
 var explosion_damage = 35
 
 onready var player = get_node("/root/Main/Player")
@@ -38,7 +38,7 @@ func init_timers():
 
 
 func is_player_in_radius(pos = position):
-	return pos.distance_to(player.position) <= 300
+	return pos.distance_to(player.position) <= 150
 	
 func explode():
 	if explosion_timer.get_time_left() == 0:

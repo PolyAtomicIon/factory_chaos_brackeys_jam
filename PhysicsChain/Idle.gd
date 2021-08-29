@@ -15,7 +15,7 @@ func update(delta : float) -> void:
 	current_position = get_parent().get_parent().get_parent().position
 	distance = current_position.distance_to(target_position)
 	
-	if distance > 400 or distance < 25:
+	if distance > 800 or distance < 5:
 		$TargetMarker.set_visible(false)
 		$TargetMarkerNotAllowed.set_visible(true)
 	else:

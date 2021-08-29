@@ -15,10 +15,11 @@ var colors = [
 	#red
 	Color('#db2a16'),
 ]
-var current_color = 0
+var current_color = -1
 
 func _ready():
 	value = 100
+	modulate = color_by_health_value(value)
 	character.connect("damaged", self, "_on_character_damage_taken")
 
 func _on_character_damage_taken(impact):
