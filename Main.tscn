@@ -1,16 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Levels/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/SoftBody2D/SoftBody2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://prefabs/Ball.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Camera2D.gd" type="Script" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
 [ext_resource path="res://Main.gd" type="Script" id=7]
-[ext_resource path="res://MovingPlatform.gd" type="Script" id=8]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 29.5788, 29.0042 )
+[ext_resource path="res://MovingPlatform.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 7 )
@@ -49,46 +45,10 @@ position = Vector2( 411.812, 138.163 )
 [node name="SoftBody2D3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -384.517, 342.736 )
 
-[node name="MovingPlatform" type="KinematicBody2D" parent="."]
-position = Vector2( 108.078, 413.529 )
-collision_layer = 3
-script = ExtResource( 8 )
-direction = Vector2( 1, 0 )
+[node name="MovingPlatform" parent="." instance=ExtResource( 9 )]
 
-[node name="Sprite" type="Sprite" parent="MovingPlatform"]
-modulate = Color( 0.352941, 0.772549, 0.180392, 1 )
-texture = ExtResource( 6 )
+[node name="MovingPlatform2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 516.754, 6.5351 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform"]
-position = Vector2( 1.52588e-05, -0.280579 )
-shape = SubResource( 1 )
-
-[node name="MovingPlatform2" type="KinematicBody2D" parent="."]
-position = Vector2( 501.676, 310.431 )
-scale = Vector2( 1, 1.02204 )
-collision_layer = 3
-script = ExtResource( 8 )
-direction = Vector2( 0, -1 )
-
-[node name="Sprite" type="Sprite" parent="MovingPlatform2"]
-modulate = Color( 0.352941, 0.772549, 0.180392, 1 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform2"]
-position = Vector2( 1.52588e-05, -0.280579 )
-shape = SubResource( 1 )
-
-[node name="MovingPlatform3" type="KinematicBody2D" parent="."]
-position = Vector2( 832.41, 121.78 )
-scale = Vector2( 1, 1.02204 )
-collision_layer = 3
-script = ExtResource( 8 )
-direction = Vector2( -1, -1 )
-
-[node name="Sprite" type="Sprite" parent="MovingPlatform3"]
-modulate = Color( 0.352941, 0.772549, 0.180392, 1 )
-texture = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform3"]
-position = Vector2( 1.52588e-05, -0.280579 )
-shape = SubResource( 1 )
+[node name="MovingPlatform3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 853.112, 225.168 )

@@ -16,6 +16,8 @@ var explosion_duration = 1
 var explosion_damage = 35
 
 onready var player = get_node("/root/Main/Player")
+onready var particles = get_child(0)
+onready var sprite = get_child(2)
 
 func _ready():
 	initial_position = position
@@ -42,6 +44,8 @@ func explode():
 	if explosion_timer.get_time_left() == 0:
 		is_active = false
 		explosion_timer.start()
+		particles.particles_explode = true
+		sprite.queue_free()
 		if is_player_in_radius():
 			player.take_damage(explosion_damage)
 		print("explode 2")
@@ -69,6 +73,4 @@ func move_platform(direction):
 	var velocity = move_and_slide(direction * movement_speed)
 
 func _physics_process(delta):
-	if position.distance_to(initial_position) > distance:
-		explode()
 	move_platform(direction)

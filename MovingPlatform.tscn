@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://fake_explosion_particles.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 29.5788, 29.0042 )
+
+[node name="MovingPlatform" type="KinematicBody2D"]
+position = Vector2( 108.078, 413.529 )
+collision_layer = 3
+script = ExtResource( 1 )
+direction = Vector2( 1, 0 )
+
+[node name="fake_explosion_particles" parent="." instance=ExtResource( 3 )]
+start_timer = false
+timer_wait_time = 0.0
+particles_explode = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.52588e-05, -0.280579 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.352941, 0.772549, 0.180392, 1 )
+texture = ExtResource( 2 )
