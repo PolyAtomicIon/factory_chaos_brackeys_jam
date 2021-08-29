@@ -32,10 +32,13 @@ func is_player_in_radius():
 	return position.distance_to(player.position) <= 250
 
 func explode():
-	explosion_timer.start()
-	particles.particles_explode = true
-	sprite.queue_free()
-	if is_player_in_radius():
-		player.take_damage(25)
-	print("explode")
+	if explosion_timer.get_time_left() == 0:
+		explosion_timer.start()
+		particles.particles_explode = true
+		sprite.queue_free()
+		if is_player_in_radius():
+			player.take_damage(25)
 
+func _on_Ball_body_entered(body):
+	explode()
+	print(body)
